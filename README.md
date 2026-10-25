@@ -14,7 +14,7 @@ Callouts con cabecera azul pizarra en oscuro, contraste comprobado y desplegable
 - [Resultados y reproducción de pruebas](docs/PRUEBAS.md).
 - [Causa CSS y corrección de los callouts](docs/CALLOUTS.md).
 - [Distribución por versiones y PR con aprobación humana](docs/DISTRIBUCION.md).
-- [Procedencia y propuesta de licencia](docs/LICENCIAS.md).
+- [Procedencia y licencias adoptadas](docs/LICENCIAS.md).
 - [Estabilización: diagnóstico del ZIP y compilación reproducible](docs/ESTABILIZACION_V0.2.md).
 
 ## Ejecutar
@@ -54,7 +54,7 @@ _extensions/ustudyopen-design/
   scss/_{base,layout,components}.scss
   assets/after-body.html            # Mejoras compartidas de accesibilidad
   assets/favicon.svg
-  PROVENANCE.md                     # Procedencia y licencia pendiente
+  PROVENANCE.md                     # Procedencia y autorización MIT adicional
 gallery/laboratorio.html           # JS exclusivo del laboratorio
 index.qmd, unidades/, *.qmd          # Contenido de muestra
 docs/                              # Contratos, resultados y propuestas
@@ -67,14 +67,14 @@ _site/, .quarto/                    # Salida/caché generada, ignorada
 
 `artifacts/` está excluido tanto de Git como del render. Las capturas antes/después se conservan localmente; si se necesitan en una revisión remota, seleccionar únicamente la evidencia aprobada, nunca subir perfiles ni el directorio completo. `.gitignore` reduce errores accidentales, pero no sustituye revisar el contenido a publicar ni elimina archivos que ya estén versionados.
 
-No se ha aplicado una licencia nueva. La propuesta MIT está condicionada a resolver derechos de los estilos de origen. La entrega inicial v0.2 no migró asignaturas.
+MIT se aplica al software propio/autorizado desde el 25 de octubre de 2026; el contenido académico conserva CC BY-NC 4.0 y los terceros sus condiciones. La entrega inicial v0.2 no migró asignaturas.
 
 La estabilización posterior conserva esta identidad, verifica dos compilaciones limpias idénticas y prepara el [piloto local de Bases de Datos](../base-de-datos/review/DESIGN_V0.2.md). El trabajo queda en ramas locales, sin commits, push ni despliegue. Inteligencia Artificial y Precálculo permanecen sin cambios. El ZIP original se conserva como evidencia; `_site/` contiene la compilación corregida.
 
 
 ## Consolidación local 0.3.0
 
-La arquitectura compartida, los estados y los workflows para cursos están documentados en [ARQUITECTURA_0.3.md](docs/ARQUITECTURA_0.3.md). La identidad 0.2 se conserva. La nueva versión es una instantánea local por SHA-256, sin tag, release ni nueva licencia. Para instalar o actualizar un curso con metadatos existentes:
+La arquitectura compartida, los estados y los workflows para cursos están documentados en [ARQUITECTURA_0.3.md](docs/ARQUITECTURA_0.3.md). La identidad 0.2 se conserva. La nueva versión es una instantánea local por SHA-256, sin tag ni release; licencias según LICENSING.md. Para instalar o actualizar un curso con metadatos existentes:
 
 ```sh
 python3 tooling/sync_course.py ../nombre-del-curso

@@ -44,7 +44,13 @@ Los workflows permanecen sin publicar: solo disparo manual, variable `USO_PAGES_
 
 ## Licencias
 
-Conservar `PROVENANCE.md`, los LICENSE originales y las atribuciones académicas. No hay autorización para una nueva licencia del sistema compartido. El origen incluye CSS de BD/IA bajo CC BY-NC 4.0 y componentes de Precálculo sin licencia expresa. Aclarar titulares y permisos antes de una distribución bajo términos nuevos. La plantilla tampoco concede derechos sobre dependencias o material de terceros.
+El titular autorizó MIT para software propio/autorizado del sistema y plantilla,
+y MIT adicional para componentes propios extraídos de BD/IA/Precálculo.
+Atribución pública: ngulloa. Los contenidos de los tres cursos utilizan
+CC BY-NC 4.0. Véanse [alcance](../LICENSING.md), [licencias](LICENCIAS.md)
+y el PROVENANCE instalado. Se conservan todos los permisos upstream.
+Los informes de entregas 0.1/0.2 describen su estado histórico anterior a
+esta autorización y no sustituyen el mapa actual.
 
 
 La activación automática posterior debe prepararse como una actualización central revisada del workflow y distribuirse con sus manifiestos: editar una copia gestionada sin actualizarlos hace fallar CI deliberadamente. El validador solo admite un evento push de despliegue cuando `course.pages_automation_approved` sea el booleano `true`, declarado después de aprobación expresa. Este metadato no está activado en ningún curso ni en la plantilla; el workflow actual sigue sin trigger push. Los procedimientos MIGRATION.md incluyen el orden y las condiciones exactas de la transición.
