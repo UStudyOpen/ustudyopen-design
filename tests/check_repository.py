@@ -9,7 +9,9 @@ errors = []
 import sys
 sys.path.insert(0, str(ROOT / 'tooling'))
 import legal_distribution
+import licensing
 legal_distribution.source_checks(ROOT, errors)
+errors.extend(licensing.validate(ROOT))
 
 candidates = ['.env', '.env.local', '.env.production', 'credentials.json', 'private.key', 'certificate.pem', '_site/index.html', '.quarto/test', 'artifacts/browser-profile/Local State', 'release.zip', 'node_modules/a']
 for candidate in candidates:

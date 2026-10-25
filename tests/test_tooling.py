@@ -39,8 +39,9 @@ class ToolingSafety(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.work = Path(self.temp.name)
         self.central = self.work / 'central'
-        for name in ['_extensions', 'tooling', 'workflows']:
+        for name in ['_extensions', 'tooling', 'workflows', 'LICENSES']:
             shutil.copytree(ROOT / name, self.central / name, ignore=shutil.ignore_patterns('__pycache__'))
+        shutil.copy2(ROOT / 'THIRD-PARTY-NOTICES.md', self.central / 'THIRD-PARTY-NOTICES.md')
         self.original_source = sync_course.SOURCE
         sync_course.SOURCE = self.central
         self.addCleanup(setattr, sync_course, 'SOURCE', self.original_source)
@@ -290,6 +291,7 @@ class ToolingSafety(unittest.TestCase):
 
     def test_source_changed_during_staging_is_rejected(self):
         root = self.course()
+        self.change_source()
         before, real = snapshot(root), shutil.copy2
         changed = False
         def mutate(source, dest, *args, **kwargs):
@@ -306,6 +308,7 @@ class ToolingSafety(unittest.TestCase):
 
     def test_concurrent_destination_edit_is_preserved(self):
         root = self.course()
+        self.change_source()
         real, changed = shutil.copy2, False
         path = root / 'tests/install_quarto.py'
         lock = (root / 'platform-vendor.json').read_bytes()

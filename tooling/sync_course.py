@@ -12,6 +12,8 @@ import re
 import shutil
 import tempfile
 
+import licensing
+
 from safe_paths import UnsafePath, checked_path, project_files
 
 SOURCE = Path(__file__).resolve().parents[1]
@@ -53,24 +55,47 @@ def inspect(target):
         raise ValueError('Unmanaged or missing extension files; inspect before installing')
     managed = {'tests/' + name: 'tooling/' + name for name in
                ['platform_validate.py', 'render_clean.py', 'post_render.py', 'install_quarto.py',
-                'browser_course.py', 'browser_client.mjs', 'safe_paths.py', 'legal_distribution.py']}
+                'browser_course.py', 'browser_client.mjs', 'safe_paths.py', 'legal_distribution.py', 'licensing.py']}
     managed.update({'.github/workflows/' + name: 'workflows/' + name for name in ['validate.yml', 'deploy.yml']})
     managed['tests/LICENSE-platform.txt'] = 'tooling/LICENSE'
     managed['.github/workflows/LICENSE-platform.txt'] = 'workflows/LICENSE'
     managed['tests/action-pins.json'] = 'workflows/action-pins.json'
+    if checked_path(target, 'licensing.json').exists():
+        managed['tests/requirements-licensing.txt'] = 'tooling/requirements-licensing.txt'
+        managed['tests/licensing-policy.json'] = 'LICENSES/policy.json'
+        managed['LICENSES/SHARED-NOTICES.md'] = 'THIRD-PARTY-NOTICES.md'
+        local_legal = json.loads((target / 'licensing.json').read_text())
+        course_license = json.loads((target / 'course.yml').read_text()).get('course', {}).get('license')
+        central_policy = json.loads(checked_path(SOURCE, 'LICENSES/policy.json').read_text())
+        license_ids = {central_policy['categories']['platform']}
+        academic = central_policy['categories']['academic_default'] if local_legal.get('is_template') else course_license
+        if academic and academic != 'pendiente-de-aclaracion':
+            license_ids.update(t for t in re.findall(r'[A-Za-z0-9.+-]+', academic) if t not in {'AND', 'OR', 'WITH'})
+        for entry in local_legal.get('third_party', []) + local_legal.get('groups', []):
+            license_ids.update(t for t in re.findall(r'[A-Za-z0-9.+-]+', entry.get('license', '')) if t not in {'AND', 'OR', 'WITH'})
+        for name in sorted(license_ids):
+            managed['LICENSES/' + name + '.txt'] = 'LICENSES/' + name + '.txt'
+        managed['REUSE.toml'] = None
     platform = checked_path(target, 'platform-vendor.json')
     old_platform = read_lock(platform) if platform.exists() else {}
-    if set(old_platform) - set(managed):
+    retired = (set(old_platform) - set(managed)) & {p for p in old_platform if p.startswith('LICENSES/') and re.fullmatch(r'LICENSES/[A-Za-z0-9.+-]+\.txt', p) and checked_path(SOURCE, p).is_file()}
+    if set(old_platform) - set(managed) - retired:
         raise ValueError('Unmanaged platform manifest path')
     for name in set(old_platform) | set(managed):
         path = checked_path(target, name)
         if name in old_platform:
             if not path.is_file() or digest(path) != old_platform[name]:
                 raise ValueError('Local platform edits detected: ' + name)
+        elif path.exists() and name.startswith('LICENSES/') and managed[name] and path.is_file() and digest(path) == digest(checked_path(SOURCE, managed[name])):
+            pass  # Adopt only byte-identical canonical legal texts; no overwrite permission inferred.
         elif path.exists():
             raise ValueError('Unmanaged platform file exists; preserve and reconcile: ' + name)
     writes = {extension + '/' + p.relative_to(source).as_posix(): (p, digest(p)) for p in source_files}
     for name, source_name in managed.items():
+        if source_name is None:
+            data = licensing.annotations(target, list(managed), central_policy).encode()
+            writes[name] = (data, hashlib.sha256(data).hexdigest())
+            continue
         path = checked_path(SOURCE, source_name)
         if not path.is_file():
             raise ValueError('Missing managed source: ' + source_name)
@@ -84,7 +109,7 @@ def inspect(target):
         'platform-vendor.json': {'version': '0.3.0', 'source': 'UStudyOpen/ustudyopen-design/tooling + workflows',
                                 'files': {name: writes[name][1] for name in managed}},
     }
-    removals = {extension + '/' + name for name in set(previous) - set(files)}
+    removals = {extension + '/' + name for name in set(previous) - set(files)} | retired
     names = set(writes) | set(manifests) | removals
     original = {}
     for name in names:
@@ -95,7 +120,7 @@ def inspect(target):
     return writes, manifests, removals, original
 
 
-def sync(target):
+def sync(target, dry_run=False, check=False):
     if Path(target).is_symlink():
         raise SystemExit('Symlink course roots are not supported')
     target = Path(target).resolve()
@@ -103,12 +128,31 @@ def sync(target):
     preserve_stage = False
     try:
         writes, manifests, removals, original = inspect(target)
+        changes = []
+        for name, (source, sha) in writes.items():
+            if original[name] != sha:
+                changes.append(name)
+        for name, data in manifests.items():
+            sha = hashlib.sha256((json.dumps(data, indent=2) + '\n').encode()).hexdigest()
+            if original[name] != sha:
+                changes.append(name)
+        changes = sorted(set(changes) | removals)
+        print(json.dumps({'course': target.name, 'changes': changes}, indent=2))
+        if dry_run or check:
+            if check and changes:
+                raise ValueError('Synchronization required')
+            return changes
+        if not changes:
+            return []
         stage = Path(tempfile.mkdtemp(prefix='.ustudyopen-sync-', dir=target))
         payload, backup = stage / 'new', stage / 'backup'
         for name, (source, sha) in writes.items():
             output = payload / name
             output.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(source, output)
+            if isinstance(source, bytes):
+                output.write_bytes(source)
+            else:
+                shutil.copy2(source, output)
             if digest(output) != sha:
                 raise ValueError('Source changed while staging: ' + name)
         for name, data in manifests.items():
@@ -120,7 +164,7 @@ def sync(target):
             actual = digest(path) if path.exists() and path.is_file() else None
             if actual != sha or (path.exists() and not path.is_file()):
                 raise ValueError('Destination changed while staging: ' + name)
-        plan = sorted(set(writes) | removals) + sorted(manifests)
+        plan = [name for name in sorted(set(writes) | removals) + sorted(manifests) if name in changes]
         (stage / 'recovery.json').write_text(json.dumps({'original': original, 'plan': plan}, indent=2) + '\n')
         touched, created_dirs = [], []
         try:
@@ -173,4 +217,8 @@ def sync(target):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('course', type=Path)
-    sync(parser.parse_args().course)
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument('--dry-run', action='store_true')
+    mode.add_argument('--check', action='store_true')
+    args = parser.parse_args()
+    sync(args.course, dry_run=args.dry_run, check=args.check)
