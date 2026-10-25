@@ -1,0 +1,38 @@
+# Quarto and all disposable browser/build evidence (never use a personal profile).
+/.quarto/
+/_site/
+/artifacts/
+/.cache/
+/node_modules/
+__pycache__/
+*.py[cod]
+**/*.quarto_ipynb
+
+# Local configuration and credentials. Examples must contain placeholders only.
+.env
+.env.*
+!.env.example
+*_quarto-local.yml
+_quarto-local.yml
+.Renviron
+.Rhistory
+.RData
+credentials*.json
+*service-account*.json
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cookie
+
+# Local packages, downloads, logs and editor/OS leftovers.
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.log
+*.tmp
+*.swp
+.DS_Store
+Thumbs.db

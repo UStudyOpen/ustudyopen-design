@@ -1,0 +1,60 @@
+---
+title: Sistema de diseño
+description: "UStudyOpen Design v0.2 · Fundamentos y uso editorial."
+---
+
+## Una identidad compartida
+
+**Azul para orientar. Verde azulado para aprender.** La interfaz mantiene fondos neutros, tipografía del sistema y suficiente espacio para que el contenido sea protagonista.
+
+La implementación utiliza Quarto 1.10.18, Bootstrap 5, marca declarativa, SCSS y JavaScript nativo. Esta galería es un prototipo local.
+
+<div class="uso-swatch-grid">
+<div class="uso-swatch"><div class="uso-swatch-color" style="background:var(--uso-primary)"></div><strong>Acción principal</strong><br><code>--uso-primary</code></div>
+<div class="uso-swatch"><div class="uso-swatch-color" style="background:var(--uso-emphasis)"></div><strong>Énfasis académico</strong><br><code>--uso-emphasis</code></div>
+<div class="uso-swatch"><div class="uso-swatch-color" style="background:var(--uso-surface)"></div><strong>Lectura</strong><br><code>--uso-surface</code></div>
+<div class="uso-swatch"><div class="uso-swatch-color" style="background:var(--uso-text)"></div><strong>Texto</strong><br><code>--uso-text</code></div>
+</div>
+
+## Utilizar un componente
+
+Las clases públicas tienen el prefijo `uso-`. Se aplican a bloques QMD o HTML semántico sin filtros propios.
+
+```markdown
+::: {.uso-academic .uso-example}
+### Ejemplo · Un título descriptivo
+
+Explicación y fórmula $f(x)=x+1$.
+:::
+
+::: {.uso-summary}
+### Ideas clave
+
+- Una idea por punto.
+- Condiciones de uso explícitas.
+:::
+```
+
+Los títulos de definición, teorema, ejemplo y ejercicio se escriben expresamente. El estilo no introduce semántica académica, referencias o numeración implícitas.
+
+## Claro y oscuro
+
+El selector nativo de Quarto está en la cabecera. Quarto consulta la preferencia del sistema cuando no hay una selección guardada y persiste la elección si el navegador permite almacenamiento.
+
+Los colores de componentes y del SVG heredan tokens del tema activo. El cambio de tema modifica la presentación sin volver a montar la interacción.
+
+## Accesibilidad y evaluación
+
+El objetivo es WCAG 2.2 AA. Hay foco visible, etiquetas de formulario, soluciones con `details`, tablas con caption y encabezados, regiones de desplazamiento y estados con texto y símbolo.
+
+Este prototipo requiere revisión visual y manual de teclado, zoom y tecnologías de asistencia antes de afirmar conformidad. Los resultados concretos de las pruebas y sus límites están en `docs/PRUEBAS.md` del repositorio.
+
+## Qué evaluar
+
+1. Legibilidad y equilibrio visual en ambos temas.
+2. Navegación de unidades, búsqueda y tabla de contenidos en móvil.
+3. Fórmulas largas, tablas y código con desplazamiento local.
+4. Foco y mensajes al responder el formulario.
+5. Conservación de los valores del laboratorio al cambiar de tema.
+
+La migración de las asignaturas existentes queda fuera de esta versión.

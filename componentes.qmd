@@ -1,0 +1,164 @@
+---
+title: Componentes académicos
+description: "Una gramática visual compartida para explicar, demostrar y practicar."
+---
+
+## Conceptos y razonamiento
+
+::: {.uso-academic}
+### Definición · Dominio
+
+El **dominio** es el conjunto de entradas para las que se define una función. La clase visual no altera el contenido ni introduce numeración automática.
+:::
+
+::: {.uso-academic}
+### Teorema · Suma de funciones continuas
+
+Si $f$ y $g$ son continuas en $a$, entonces $f+g$ es continua en $a$.
+:::
+
+::: {.uso-academic .uso-example}
+### Ejemplo · Una entrada válida
+
+Para $f(x)=\sqrt{x}$ sobre los números reales, $x=4$ pertenece al dominio y $f(4)=2$.
+:::
+
+::: {.uso-academic .uso-exercise}
+### Ejercicio · Explica tu respuesta
+
+¿Pertenece $-1$ al dominio real de $f(x)=\sqrt{x}$?
+
+<details class="uso-solution">
+<summary>Mostrar solución</summary>
+
+No. La raíz cuadrada real requiere $x\geq 0$. Por ello, el dominio es $[0,\infty)$.
+
+</details>
+:::
+
+## Fórmulas y síntesis
+
+::: {.uso-formula}
+### Ficha · Ecuación de la recta
+
+$$y-y_0=m(x-x_0).$$
+
+**Condición de uso:** recta no vertical de pendiente $m$ que pasa por $(x_0,y_0)$.
+:::
+
+::: {.uso-summary}
+### Resumen de una estrategia
+
+1. Identifica las variables y sus unidades.
+2. Expresa la relación entre ellas.
+3. Comprueba el resultado con una entrada conocida.
+:::
+
+### Una expresión extensa
+
+El siguiente bloque tiene desplazamiento local cuando el ancho disponible lo requiere.
+
+<div class="uso-math" role="region" aria-label="Identidad algebraica extensa; desplazamiento horizontal disponible" tabindex="0">
+
+$$\left(\sum_{k=1}^{n}a_k b_k\right)^2\leq\left(\sum_{k=1}^{n}a_k^2\right)\left(\sum_{k=1}^{n}b_k^2\right),\qquad (a_1,\ldots,a_n),(b_1,\ldots,b_n)\in\mathbb{R}^n.$$
+
+</div>
+
+## Avisos con intención
+
+::: {.callout-note title="Información · Antes de comenzar"}
+Los ejemplos de esta galería son material de muestra. Puedes evaluar su legibilidad en ambos temas sin alterar los cursos existentes.
+:::
+
+::: {.callout-warning title="Advertencia · Una restricción del dominio"}
+Antes de dividir por una expresión, verifica que su valor sea distinto de cero.
+:::
+
+## Código y tablas
+
+<p id="uso-inline-code-example">Atributos de una relación: <code>rut</code>, <code>nombre</code>, <code>carrera</code>, <code>codigo</code>, <code>creditos</code> y <code>semestre</code>.</p>
+
+```sql
+-- Ejemplo visual; no consulta ninguna base de datos.
+SELECT nombre, creditos
+FROM asignaturas
+WHERE creditos >= 6
+ORDER BY nombre;
+```
+
+<div class="uso-table-wrap" role="region" aria-label="Plan de trabajo; tabla desplazable" tabindex="0">
+<table>
+<caption>Tabla 2. Plan ficticio para comparar estados y textos.</caption>
+<thead><tr><th scope="col">Recurso</th><th scope="col">Propósito de aprendizaje</th><th scope="col">Estado</th></tr></thead>
+<tbody>
+<tr><th scope="row">Guía de funciones</th><td>Reconocer entradas, salidas y dominio.</td><td><span class="uso-status uso-status--lista">✓ Lista</span></td></tr>
+<tr><th scope="row">Taller de límites</th><td>Conectar representaciones simbólicas y gráficas.</td><td><span class="uso-status uso-status--en-desarrollo">◐ En desarrollo</span></td></tr>
+<tr><th scope="row">Práctica de derivadas</th><td>Interpretar tasas de cambio.</td><td><span class="uso-status uso-status--proximamente">○ Próximamente</span></td></tr>
+</tbody>
+</table>
+</div>
+
+## Estados editoriales
+
+- [✓ Lista]{.uso-status .uso-status--lista}: recurso disponible.
+- [◐ En desarrollo]{.uso-status .uso-status--en-desarrollo}: trabajo activo.
+- [○ Próximamente]{.uso-status .uso-status--proximamente}: recurso planificado.
+
+Las etiquetas combinan texto y símbolos. Se declaran manualmente; esta versión no calcula estados.
+
+## Variantes nativas de avisos
+
+Muestras de presentación para revisar iconos, bordes y estados. Los desplegables mantienen el comportamiento de Quarto.
+
+::: {.callout-note title="Información · Cerrado inicialmente" collapse="true" data-fixture="note-closed"}
+Muestra de contenido desplegable con [enlace a la guía](sistema.qmd).
+:::
+
+::: {.callout-note title="Información · Abierto inicialmente" collapse="false" data-fixture="note-open"}
+Muestra de contenido desplegable con [enlace a la guía](sistema.qmd).
+:::
+
+::: {.callout-tip title="Consejo · Muestra visual"}
+Texto de referencia para evaluar la presentación en ambos temas.
+:::
+
+::: {.callout-tip title="Consejo · Cerrado inicialmente" collapse="true" data-fixture="tip-closed"}
+Muestra de contenido desplegable con [enlace a la guía](sistema.qmd).
+:::
+
+::: {.callout-tip title="Consejo · Abierto inicialmente" collapse="false" data-fixture="tip-open"}
+Muestra de contenido desplegable con [enlace a la guía](sistema.qmd).
+:::
+
+::: {.callout-important title="Importante · Muestra visual"}
+Texto de referencia para evaluar la presentación en ambos temas.
+:::
+
+::: {.callout-important title="Importante · Cerrado inicialmente" collapse="true" data-fixture="important-closed"}
+Muestra de contenido desplegable con [enlace a la guía](sistema.qmd).
+:::
+
+::: {.callout-important title="Importante · Abierto inicialmente" collapse="false" data-fixture="important-open"}
+Muestra de contenido desplegable con [enlace a la guía](sistema.qmd).
+:::
+
+::: {.callout-caution title="Precaución · Muestra visual"}
+Texto de referencia para evaluar la presentación en ambos temas.
+:::
+
+::: {.callout-caution title="Precaución · Cerrado inicialmente" collapse="true" data-fixture="caution-closed"}
+Muestra de contenido desplegable con [enlace a la guía](sistema.qmd).
+:::
+
+::: {.callout-caution title="Precaución · Abierto inicialmente" collapse="false" data-fixture="caution-open"}
+Muestra de contenido desplegable con [enlace a la guía](sistema.qmd).
+:::
+
+::: {.callout-warning title="Advertencia · Cerrado inicialmente" collapse="true" data-fixture="warning-closed"}
+Muestra de contenido desplegable con [enlace a la guía](sistema.qmd).
+:::
+
+::: {.callout-warning title="Advertencia · Abierto inicialmente" collapse="false" data-fixture="warning-open"}
+Muestra de contenido desplegable con [enlace a la guía](sistema.qmd).
+:::
+

@@ -1,0 +1,60 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+  - index.qmd
+  - unidades/fundamentos.qmd
+  - componentes.qmd
+  - laboratorio.qmd
+  - sistema.qmd
+  post-render:
+  - python3 tooling/post_render.py
+brand:
+  light: _extensions/ustudyopen-design/brand/_brand.yml
+  dark: _extensions/ustudyopen-design/brand/_brand-dark.yml
+lang: es
+website:
+  title: UStudyOpen
+  favicon: _extensions/ustudyopen-design/assets/favicon.svg
+  description: Laboratorio UStudyOpen Design 0.3.0 local; identidad visual 0.2 preservada
+  search:
+    location: navbar
+    type: overlay
+  navbar:
+    title: UStudyOpen
+    pinned: true
+    background: light
+    collapse-below: lg
+    left:
+    - text: Inicio
+      href: index.qmd
+    - text: Matemática · curso de muestra
+      href: unidades/fundamentos.qmd
+    right:
+    - text: Guía de diseño
+      href: sistema.qmd
+  sidebar:
+    title: Matemática
+    style: docked
+    collapse-level: 2
+    contents:
+    - text: Presentación del curso
+      href: index.qmd
+    - section: 01 · Fundamentos
+      contents:
+      - text: Funciones y modelos
+        href: unidades/fundamentos.qmd
+    - section: 02 · Explorar el diseño
+      contents:
+      - text: Componentes académicos
+        href: componentes.qmd
+      - text: Laboratorio visual
+        href: laboratorio.qmd
+    - text: Sistema de diseño v0.2
+      href: sistema.qmd
+  page-navigation: true
+  page-footer:
+    left: UStudyOpen · Aprender, comprender, compartir.
+    right: Instantánea local 0.3.0 · Curso de muestra
+format:
+  ustudyopen-design-html: default

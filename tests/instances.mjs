@@ -1,0 +1,25 @@
+import {connect} from './cdp.mjs';
+const [base='http://127.0.0.1:4851/',debug='http://127.0.0.1:9228']=Deno.args;
+const {cdp,evaluate,waitFor,click,errors,close}=await connect(debug);
+const checks=[];
+function check(name,pass,details){checks.push({name,pass:!!pass,details});console.log(`${pass?'PASS':'FAIL'} ${name}${details?": "+JSON.stringify(details):""}`);}
+await cdp('Emulation.setDeviceMetricsOverride',{width:1440,height:1000,deviceScaleFactor:1,mobile:false});
+await cdp('Page.navigate',{url:new URL('instances.html',base).href});
+await waitFor("document.readyState==='complete' && document.querySelectorAll('[data-uso-demo]').length===2 && !document.querySelector('[data-slope]').disabled");
+check('two graphs and forms, unique accessible IDs',await evaluate("(()=>{const ids=[...document.querySelectorAll('[id]')].map(e=>e.id);return new Set(ids).size===ids.length&&document.querySelectorAll('[data-uso-form]').length===2&&[...document.querySelectorAll('[for],[aria-labelledby],[aria-describedby]')].every(el=>['for','aria-labelledby','aria-describedby'].every(a=>!el.hasAttribute(a)||el.getAttribute(a).split(' ').every(id=>document.getElementById(id))));})()"));
+await evaluate("(()=>{const roots=document.querySelectorAll('[data-uso-demo]');const range=roots[0].querySelector('[data-slope]');range.value='1.8';range.dispatchEvent(new Event('input'));const ref=roots[0].querySelector('[data-reference]');ref.checked=false;ref.dispatchEvent(new Event('change'));})()");
+check('changing first graph leaves second untouched',await evaluate("(()=>{const [a,b]=document.querySelectorAll('[data-uso-demo]');return a.querySelector('[data-value]').value==='1,8'&&b.querySelector('[data-value]').value==='1'&&!a.querySelector('[data-reference]').checked&&b.querySelector('[data-reference]').checked;})()"));
+await evaluate("(()=>{const r=document.querySelectorAll('[data-slope]')[1];r.value='0.4';r.dispatchEvent(new Event('input'));})()");
+await click('[data-uso-demo] [data-reset]');
+check('reset of first graph preserves second graph',await evaluate("document.querySelectorAll('[data-value]')[0].value==='1'&&document.querySelectorAll('[data-value]')[1].value==='0,4'"));
+await evaluate("(()=>{const [a,b]=document.querySelectorAll('[data-uso-form]');a.querySelector('[name=answer]').value='5';b.querySelector('[name=answer]').value='3';})()");
+await click('[data-uso-form] button');
+check('first form has local error and focus',await evaluate("(()=>{const [a,b]=document.querySelectorAll('[data-uso-form]');return a.querySelector('[name=answer]').getAttribute('aria-invalid')==='true'&&document.activeElement===a.querySelector('[name=answer]')&&!b.querySelector('[data-feedback]').textContent.trim();})()"));
+await click('[data-uso-form]:last-of-type button');
+check('second form validates independently of fixed IDs',await evaluate("(()=>{const [a,b]=document.querySelectorAll('[data-uso-form]');return a.querySelector('[data-feedback]').textContent.includes('Revisa')&&b.querySelector('[data-feedback]').textContent.includes('correcta');})()"));
+await evaluate("(()=>{const input=document.querySelector('[data-uso-form] [name=answer]');input.value='';input.dispatchEvent(new Event('input'));})()");
+await click('[data-uso-form] button');
+check('editing clears stale feedback; empty required input cannot submit',await evaluate("!document.querySelector('[data-feedback]').textContent&&document.querySelector('[name=answer]').validity.valueMissing&&!document.querySelector('[name=answer]').hasAttribute('aria-invalid')"));
+check('no browser errors',errors.length===0);
+const report={checks,errors,summary:{passed:checks.filter(c=>c.pass).length,failed:checks.filter(c=>!c.pass).length}};
+await Deno.writeTextFile('artifacts/v0.2/instances-results.json',JSON.stringify(report,null,2)+'\n');close();Deno.exit(report.summary.failed?1:0);
