@@ -6,6 +6,11 @@ import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 errors = []
+import sys
+sys.path.insert(0, str(ROOT / 'tooling'))
+import legal_distribution
+legal_distribution.source_checks(ROOT, errors)
+
 candidates = ['.env', '.env.local', '.env.production', 'credentials.json', 'private.key', 'certificate.pem', '_site/index.html', '.quarto/test', 'artifacts/browser-profile/Local State', 'release.zip', 'node_modules/a']
 for candidate in candidates:
     if subprocess.run(['git', 'check-ignore', '-q', candidate], cwd=ROOT).returncode:

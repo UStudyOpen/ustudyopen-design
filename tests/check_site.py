@@ -39,6 +39,10 @@ class Page(HTMLParser):
 
 pages = {p: Page(p) for p in SITE.rglob('*.html')}
 errors, checked = [], 0
+import sys
+sys.path.insert(0, str(ROOT / 'tooling'))
+import legal_distribution
+legal_distribution.output_checks(ROOT, errors)
 theme_pairs = {}
 for path, page in pages.items():
     # Counting CSS files alone misses a partial render referencing stale themes.

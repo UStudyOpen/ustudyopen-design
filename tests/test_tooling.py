@@ -75,6 +75,28 @@ class ToolingSafety(unittest.TestCase):
         self.assertEqual(snapshot(root), before)
         self.assert_no_stage(root)
 
+    def test_vendor_licenses_accompany_each_channel_and_are_hashed(self):
+        root = self.course()
+        extension = root / '_extensions/ustudyopen-design'
+        lock = json.loads((root / 'design-vendor.json').read_text())['files']
+        for name in ['LICENSE', 'LICENSING.md', 'PROVENANCE.md',
+                     'THIRD-PARTY-NOTICES.md', 'LICENSES/fuse-6.6.2.txt']:
+            self.assertEqual(hashlib.sha256((extension / name).read_bytes()).hexdigest(), lock[name])
+        platform = json.loads((root / 'platform-vendor.json').read_text())['files']
+        for name, source in [('tests/LICENSE-platform.txt', 'tooling/LICENSE'),
+                             ('.github/workflows/LICENSE-platform.txt', 'workflows/LICENSE')]:
+            self.assertEqual((root / name).read_bytes(), (self.central / source).read_bytes())
+            self.assertEqual(hashlib.sha256((root / name).read_bytes()).hexdigest(), platform[name])
+
+    def test_independent_license_is_never_overwritten(self):
+        root = self.course(False)
+        (root / 'tests').mkdir()
+        (root / 'tests/LICENSE-platform.txt').write_text('independent legal notice')
+        before = snapshot(root)
+        with self.assertRaisesRegex(SystemExit, 'Unmanaged platform file'):
+            self.sync(root)
+        self.assertEqual(snapshot(root), before)
+
     def test_unmanaged_initial_render_script_is_never_overwritten(self):
         root = self.course(False)
         (root / 'tests').mkdir()

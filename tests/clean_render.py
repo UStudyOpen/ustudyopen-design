@@ -15,7 +15,8 @@ ROOT = Path(__file__).resolve().parents[1]
 version = subprocess.check_output(['quarto', '--version'], text=True).strip()
 if version != '1.10.18':
     raise SystemExit(f'Expected Quarto 1.10.18, got {version}')
-sources = ('_quarto.yml', '.quartoignore', '_extensions', 'tooling', 'gallery', 'index.qmd',
+sources = ('_quarto.yml', '.quartoignore', '_extensions', 'tooling', 'workflows', 'gallery', 'index.qmd',
+           'LICENSE', 'LICENSING.md', 'THIRD-PARTY-NOTICES.md', 'LICENSES',
            'unidades', 'componentes.qmd', 'laboratorio.qmd', 'sistema.qmd')
 report_dir = ROOT / 'artifacts/stabilization'
 report_dir.mkdir(parents=True, exist_ok=True)

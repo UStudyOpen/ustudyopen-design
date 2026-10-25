@@ -18,3 +18,13 @@ Suites selectivas: `bash tests/run-browser.sh browser|callouts|instances|subpath
 - `sandbox.mjs`: estado del aislamiento del navegador en su página interna.
 
 Resultados y capturas en `artifacts/v0.2/`, excluidos de Git y del render. [PRUEBAS.md](../docs/PRUEBAS.md) distingue lo ejecutado de lo pendiente y documenta los límites de accesibilidad. Las capturas `before` de esta iteración son evidencia histórica local; no regenerarlas con el CSS v0.2.
+
+## Distribución legal
+
+`python3 tests/test_licensing.py`: ocho regresiones de clon, extensión instalable,
+licencia académica elegible, textos/links del sitio, reproducibilidad, archivos
+ausentes, integridad upstream y rechazo de enlaces simbólicos.
+`python3 tests/test_tooling.py`: 24 regresiones del actualizador, incluidas
+licencias junto a herramientas/workflows, manifiestos y preservación de avisos
+independientes. `check_site.py` y `check_repository.py` verifican los canales
+de salida y fuente; los cursos ejecutan lo mismo desde platform_validate.py.

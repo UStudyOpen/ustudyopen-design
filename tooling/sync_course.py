@@ -53,8 +53,10 @@ def inspect(target):
         raise ValueError('Unmanaged or missing extension files; inspect before installing')
     managed = {'tests/' + name: 'tooling/' + name for name in
                ['platform_validate.py', 'render_clean.py', 'post_render.py', 'install_quarto.py',
-                'browser_course.py', 'browser_client.mjs', 'safe_paths.py']}
+                'browser_course.py', 'browser_client.mjs', 'safe_paths.py', 'legal_distribution.py']}
     managed.update({'.github/workflows/' + name: 'workflows/' + name for name in ['validate.yml', 'deploy.yml']})
+    managed['tests/LICENSE-platform.txt'] = 'tooling/LICENSE'
+    managed['.github/workflows/LICENSE-platform.txt'] = 'workflows/LICENSE'
     managed['tests/action-pins.json'] = 'workflows/action-pins.json'
     platform = checked_path(target, 'platform-vendor.json')
     old_platform = read_lock(platform) if platform.exists() else {}
