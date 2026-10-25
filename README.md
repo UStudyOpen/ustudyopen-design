@@ -83,3 +83,9 @@ python3 tooling/sync_course.py ../nombre-del-curso
 La herramienta rechaza modificaciones independientes de archivos gestionados. Revisar los dos manifiestos y las diferencias antes de integrar. La documentación histórica v0.2 y sus resultados se conserva como referencia, sin presentarlos como pruebas de esta iteración.
 
 La continuación de la revisión añade comprobaciones de rutas, protección frente a archivos ajenos y restauración de actualizaciones o de `_site/` que fallen. Antes de distribuir herramientas, ejecutar también `python3 tests/test_tooling.py`; consultar las garantías y límites de recuperación en [ARQUITECTURA_0.3.md](docs/ARQUITECTURA_0.3.md).
+
+## Licencias adoptadas
+
+MIT para software y documentación propia/autorizada; [alcance](LICENSING.md),
+[procedencia](_extensions/ustudyopen-design/PROVENANCE.md) y
+[terceros](THIRD-PARTY-NOTICES.md). Contenido académico de los cursos: CC BY-NC 4.0.
