@@ -55,7 +55,8 @@ def inspect(target):
         raise ValueError('Unmanaged or missing extension files; inspect before installing')
     managed = {'tests/' + name: 'tooling/' + name for name in
                ['platform_validate.py', 'render_clean.py', 'post_render.py', 'install_quarto.py',
-                'browser_course.py', 'browser_client.mjs', 'safe_paths.py', 'legal_distribution.py', 'licensing.py']}
+                'browser_course.py', 'browser_client.mjs', 'safe_paths.py', 'legal_distribution.py', 'licensing.py',
+                'pages_authorization.py']}
     managed.update({'.github/workflows/' + name: 'workflows/' + name for name in ['validate.yml', 'deploy.yml']})
     managed['tests/LICENSE-platform.txt'] = 'tooling/LICENSE'
     managed['.github/workflows/LICENSE-platform.txt'] = 'workflows/LICENSE'
@@ -99,7 +100,13 @@ def inspect(target):
         path = checked_path(SOURCE, source_name)
         if not path.is_file():
             raise ValueError('Missing managed source: ' + source_name)
-        writes[name] = (path, digest(path))
+        if name == '.github/workflows/deploy.yml':
+            approved = json.loads((target / 'course.yml').read_text()).get('course', {}).get('pages_automation_approved') is True
+            data = path.read_text().replace('  # AUTOMATIC_PAGES_TRIGGER',
+                                          '  push:\n    branches: [main]' if approved else '  # Automatic publication not approved for this course.').encode()
+            writes[name] = (data, hashlib.sha256(data).hexdigest())
+        else:
+            writes[name] = (path, digest(path))
     files = {p.relative_to(source).as_posix(): writes[extension + '/' + p.relative_to(source).as_posix()][1]
              for p in source_files}
     manifests = {

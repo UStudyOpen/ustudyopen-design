@@ -78,7 +78,10 @@
         "tooling/requirements-licensing.txt",
         "tests/test_licensing_automation.py",
         "docs/AUTOMATIZACION-LICENCIAS.md",
-        "tooling/plan_licensing_update.py"
+        "tooling/plan_licensing_update.py",
+        "tooling/pages_authorization.py",
+        "tests/test_pages_automation.py",
+        "PAGES-AUTOMATION.md"
       ],
       "license": "MIT",
       "copyright": "2026 ngulloa"

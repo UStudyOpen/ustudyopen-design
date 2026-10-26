@@ -8,7 +8,7 @@ SPDX-FileCopyrightText = "2026 ngulloa"
 SPDX-License-Identifier = "MIT"
 
 [[annotations]]
-path = ["tooling/platform_validate.py", "tooling/render_clean.py", "tooling/post_render.py", "tooling/install_quarto.py", "tooling/sync_course.py", "tooling/browser_course.py", "tooling/safe_paths.py", "tooling/legal_distribution.py", "tooling/licensing.py", "tooling/create_course.py", "tooling/requirements-licensing.txt", "tests/test_licensing_automation.py", "docs/AUTOMATIZACION-LICENCIAS.md", "tooling/plan_licensing_update.py"]
+path = ["tooling/platform_validate.py", "tooling/render_clean.py", "tooling/post_render.py", "tooling/install_quarto.py", "tooling/sync_course.py", "tooling/browser_course.py", "tooling/safe_paths.py", "tooling/legal_distribution.py", "tooling/licensing.py", "tooling/create_course.py", "tooling/requirements-licensing.txt", "tests/test_licensing_automation.py", "docs/AUTOMATIZACION-LICENCIAS.md", "tooling/plan_licensing_update.py", "tooling/pages_authorization.py", "tests/test_pages_automation.py", "PAGES-AUTOMATION.md"]
 precedence = "closest"
 SPDX-FileCopyrightText = "2026 ngulloa"
 SPDX-License-Identifier = "MIT"
