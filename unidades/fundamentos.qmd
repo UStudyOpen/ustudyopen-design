@@ -1,0 +1,110 @@
+---
+title: Funciones y modelos
+description: "Unidad 01 · Una relación, varias maneras de comprenderla."
+---
+
+::: {.uso-eyebrow}
+Matemática · Fundamentos
+:::
+
+Una función permite describir cómo una cantidad depende de otra. En esta unidad trabajaremos con una relación sencilla y la observaremos desde el lenguaje, una tabla y una fórmula.
+
+## Una idea fundamental
+
+::: {#uso-def-funcion .uso-academic}
+### Definición · Función
+
+Una **función** de un conjunto $A$ a un conjunto $B$ asigna a cada elemento de $A$ exactamente un elemento de $B$.
+
+Escribimos $f: A \to B$. El conjunto $A$ es el dominio; los valores que alcanza $f$ forman su imagen.
+:::
+
+La palabra «exactamente» es esencial: una misma entrada no puede tener dos salidas distintas.
+
+::: {.callout-note title="Una pregunta para orientar la lectura"}
+Cuando examines una relación, identifica primero sus entradas y salidas. Después comprueba si cada entrada tiene una única salida.
+:::
+
+## De la expresión al significado
+
+Considera la función $f(x)=2x+1$. El coeficiente $2$ indica que, por cada unidad de cambio en $x$, el valor de $f(x)$ aumenta en dos unidades.
+
+::: {.uso-academic .uso-example}
+### Ejemplo · Evaluar una función
+
+Para calcular $f(3)$, sustituimos la variable por el valor de entrada:
+
+$$
+f(3)=2\cdot 3+1=7.
+$$
+
+La entrada es $3$ y la salida es $7$.
+:::
+
+<div class="uso-table-wrap" role="region" aria-label="Valores de la función; tabla desplazable" tabindex="0">
+<table>
+<caption>Tabla 1. Entradas y salidas de f(x) = 2x + 1.</caption>
+<thead><tr><th scope="col">Entrada x</th><th scope="col">Cálculo</th><th scope="col">Salida f(x)</th></tr></thead>
+<tbody><tr><th scope="row">0</th><td>2 · 0 + 1</td><td>1</td></tr><tr><th scope="row">1</th><td>2 · 1 + 1</td><td>3</td></tr><tr><th scope="row">3</th><td>2 · 3 + 1</td><td>7</td></tr></tbody>
+</table>
+</div>
+
+Una propiedad útil conecta el signo de la pendiente con el orden de las salidas.
+
+::: {#uso-thm-crecimiento .uso-academic}
+### Teorema · Crecimiento de una función afín
+
+Si $f(x)=mx+b$ y $m>0$, entonces $f$ es estrictamente creciente en $\mathbb{R}$.
+
+**Demostración.** Si $x_1<x_2$, entonces $x_2-x_1>0$. Por tanto,
+
+$$f(x_2)-f(x_1)=m(x_2-x_1)>0.$$
+
+Así, $f(x_1)<f(x_2)$.
+:::
+
+## Practica y comprueba
+
+::: {.uso-academic .uso-exercise}
+### Ejercicio · Interpretar una pendiente
+
+Sea $g(x)=3x-2$. Calcula $g(0)$ y $g(2)$. ¿Cuánto cambia la salida cuando la entrada aumenta dos unidades?
+
+<details class="uso-solution">
+<summary>Ver solución razonada</summary>
+
+Se obtiene $g(0)=-2$ y $g(2)=4$. El cambio en la salida es $4-(-2)=6$, que equivale a la pendiente $3$ multiplicada por el cambio $2$ de la entrada.
+
+</details>
+:::
+
+### El mismo cálculo en código
+
+```python
+# Código ilustrativo: se muestra, no se ejecuta durante el render.
+def funcion(x):
+    return 3 * x - 2
+
+valores = [(x, funcion(x)) for x in (0, 2)]
+print(valores)  # [(0, -2), (2, 4)]
+```
+
+## Qué conviene recordar
+
+::: {.uso-formula}
+### Ficha · Tasa de cambio constante
+
+$$m=\frac{f(x_2)-f(x_1)}{x_2-x_1}, \qquad x_1\ne x_2.$$
+
+En una función afín, esta razón es la misma para cualquier par de entradas distintas.
+:::
+
+::: {.uso-summary}
+### Tres ideas clave
+
+1. Una entrada de una función tiene una sola salida.
+2. Evaluar consiste en sustituir una entrada en la expresión.
+3. La pendiente describe el cambio de la salida por unidad de entrada.
+:::
+
+[Explora la pendiente en el laboratorio](../laboratorio.qmd).

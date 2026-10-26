@@ -1,0 +1,69 @@
+---
+include-after-body: gallery/laboratorio.html
+title: Laboratorio visual
+description: "Controles, formularios y un gráfico que acompaña tu preferencia de tema."
+---
+
+## Explorar una pendiente
+
+Modifica la pendiente de $f(x)=mx+1$ y observa su valor en $x=2$. Puedes cambiar el tema en cualquier momento: el gráfico mantiene los valores seleccionados.
+
+<section class="uso-demo" data-uso-demo aria-labelledby="demo-title">
+<h3 id="demo-title">Una recta, distintas pendientes</h3>
+<div class="uso-demo-controls">
+<div class="uso-field">
+<label for="uso-slope">Pendiente m: <output id="uso-slope-value" for="uso-slope" data-value>1</output></label>
+<input id="uso-slope" data-slope type="range" min="0" max="2" step="0.1" value="1" aria-describedby="slope-help" disabled>
+<small id="slope-help">Entre 0 y 2. Usa las flechas del teclado para ajustar.</small>
+</div>
+<div class="uso-field">
+<label class="uso-check" for="uso-reference"><input id="uso-reference" data-reference type="checkbox" checked disabled> Mostrar recta de referencia</label>
+<button class="uso-button uso-button--secondary" data-reset type="button">Restablecer valores</button>
+</div>
+</div>
+<div class="uso-chart-wrap" role="region" aria-label="Gráfico de funciones; desplazamiento horizontal disponible en móvil" tabindex="0">
+<svg class="uso-chart" viewBox="0 0 520 310" role="img" aria-labelledby="chart-title chart-desc">
+<title id="chart-title">Comparación de funciones afines</title>
+<desc id="chart-desc" data-chart-description>Recta f(x) = x + 1. Para x = 2, f(x) = 3. Referencia discontinua: g(x) = x + 1.</desc>
+<g class="uso-chart-grid"><path d="M56 46H464 M56 88H464 M56 130H464 M56 172H464 M56 214H464 M158 46V256 M260 46V256 M362 46V256 M464 46V256"/></g>
+<path class="uso-chart-axis" d="M56 40V256H480" fill="none"/>
+<g><text x="20" y="52">10</text><text x="28" y="136">6</text><text x="28" y="220">2</text><text x="51" y="282">0</text><text x="255" y="282">2</text><text x="459" y="282">4</text><text x="490" y="262">x</text><text x="12" y="24">f(x)</text></g>
+<path class="uso-chart-line" data-line d="M56 235L464 151"/>
+<path class="uso-chart-reference" data-reference-line d="M56 235L464 151"/>
+<circle class="uso-chart-point" data-point cx="260" cy="193" r="6"/>
+</svg>
+</div>
+<div class="uso-chart-legend"><span>● Línea continua: f(x) = mx + 1</span><span>┄ Referencia: g(x) = x + 1</span></div>
+<p class="uso-result" data-result role="status" aria-live="polite" aria-atomic="true">Pendiente 1. Para x = 2, f(x) = 3.</p>
+<noscript><p>Activa JavaScript para ajustar los controles. El gráfico estático muestra m = 1.</p></noscript>
+</section>
+
+## Responder y comprobar
+
+<form data-uso-form>
+<div class="uso-field">
+<label for="uso-answer">Si f(x) = x + 1, ¿cuánto vale f(2)?</label>
+<input id="uso-answer" name="answer" type="number" step="any" required inputmode="decimal" aria-describedby="answer-help answer-feedback">
+<small id="answer-help">Introduce un número y pulsa «Comprobar respuesta».</small>
+<p id="answer-feedback" data-feedback role="status" aria-live="polite"></p>
+</div>
+<button type="submit" class="uso-button">Comprobar respuesta</button>
+<noscript><p>Comprobación disponible con JavaScript. Solución: f(2) = 3.</p></noscript>
+</form>
+
+## Controles de referencia
+
+<div class="uso-demo-controls">
+<div class="uso-field"><label for="uso-unit">Unidad de estudio</label><select id="uso-unit"><option>Funciones y modelos</option><option>Límites y continuidad</option><option>Cambio y aproximación</option></select></div>
+<div class="uso-field"><label for="uso-disabled">Curso asignado · campo desactivado</label><input id="uso-disabled" type="text" value="Matemática" disabled></div>
+<div class="uso-field"><label for="uso-invalid">Ejemplo de campo con error</label><input id="uso-invalid" type="text" value="entrada de muestra" aria-invalid="true" aria-describedby="invalid-help"><small id="invalid-help" class="uso-error">Error de muestra: escribe un valor numérico.</small></div>
+<div class="uso-field"><label for="uso-notes">Apuntes personales</label><textarea id="uso-notes" rows="3" placeholder="Escribe una observación…"></textarea></div>
+</div>
+
+<label class="uso-check" for="uso-reminder"><input id="uso-reminder" type="checkbox"> He revisado el ejemplo</label>
+
+<button class="uso-button" type="button" disabled>Actividad no disponible</button>
+
+::: {.callout-note title="Alcance de la exploración"}
+Los controles sirven para evaluar presentación y accesibilidad. Los apuntes no se guardan y los formularios no envían información a un servidor.
+:::

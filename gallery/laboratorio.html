@@ -1,0 +1,56 @@
+<script>
+// Gallery only: illustrative models; never installed with the extension.
+(() => {
+  document.querySelectorAll('[data-uso-demo]').forEach((root) => {
+    const range = root.querySelector('[data-slope]');
+    const reference = root.querySelector('[data-reference]');
+    const output = root.querySelector('[data-value]');
+    const result = root.querySelector('[data-result]');
+    const line = root.querySelector('[data-line]');
+    const point = root.querySelector('[data-point]');
+    const referenceLine = root.querySelector('[data-reference-line]');
+    const description = root.querySelector('[data-chart-description]');
+    const render = () => {
+      const m = Number(range.value);
+      const value = m.toLocaleString('es-CL', {maximumFractionDigits: 1});
+      output.value = value;
+      // Coordinates for x in [0,4], y in [0,10]. This demo has no course model.
+      const y = (x) => 256 - (m * x + 1) * 21;
+      line.setAttribute('d', `M 56 ${y(0)} L 464 ${y(4)}`);
+      point.setAttribute('cy', y(2));
+      referenceLine.hidden = !reference.checked;
+      referenceLine.setAttribute('visibility', reference.checked ? 'visible' : 'hidden');
+      const message = `Pendiente ${value}. Para x = 2, f(x) = ${(m * 2 + 1).toLocaleString('es-CL')}.`;
+      result.textContent = message;
+      description.textContent = `Recta f(x) = ${value}x + 1. ${message} ${reference.checked ? 'Referencia discontinua: g(x) = x + 1.' : 'Referencia oculta.'}`;
+    };
+    range.disabled = false;
+    reference.disabled = false;
+    range.addEventListener('input', render);
+    reference.addEventListener('change', render);
+    root.querySelector('[data-reset]').addEventListener('click', () => {
+      range.value = '1';
+      reference.checked = true;
+      render();
+    });
+    render();
+  });
+  document.querySelectorAll('[data-uso-form]').forEach((form) => {
+    const input = form.querySelector('[name="answer"]');
+    const feedback = form.querySelector('[data-feedback]');
+    input.addEventListener('input', () => {
+      input.removeAttribute('aria-invalid');
+      feedback.textContent = '';
+      feedback.className = '';
+    });
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const correct = Number(input.value) === 3;
+      input.setAttribute('aria-invalid', String(!correct));
+      feedback.textContent = correct ? '✓ Respuesta correcta: f(2) = 3.' : 'Revisa tu respuesta. Sustituye x = 2 en f(x) = x + 1.';
+      feedback.className = correct ? 'uso-result' : 'uso-error';
+      if (!correct) input.focus();
+    });
+  });
+})();
+</script>

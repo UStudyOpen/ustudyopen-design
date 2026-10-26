@@ -1,0 +1,122 @@
+{
+  "policy_schema": 1,
+  "groups": [
+    {
+      "paths": [
+        ".gitignore",
+        ".quartoignore",
+        "AGENTS.md",
+        "CHANGELOG.md",
+        "LICENSING.md",
+        "README.md",
+        "THIRD-PARTY-NOTICES.md",
+        "_quarto.yml",
+        "componentes.qmd",
+        "docs/ARQUITECTURA.md",
+        "docs/ARQUITECTURA_0.3.md",
+        "docs/CALLOUTS.md",
+        "docs/COMPARACION_VISUAL.md",
+        "docs/COMPONENTES.md",
+        "docs/DISTRIBUCION.md",
+        "docs/ENTREGA_V0.2.md",
+        "docs/ESTABILIZACION_V0.2.md",
+        "docs/INLINE_CODE.md",
+        "docs/LICENCIAS.md",
+        "docs/PRUEBAS.md",
+        "docs/REVISION_VISUAL.md",
+        "docs/TOKENS.md",
+        "gallery/laboratorio.html",
+        "index.qmd",
+        "laboratorio.qmd",
+        "sistema.qmd",
+        "tests/README.md",
+        "tests/browser.mjs",
+        "tests/callouts.mjs",
+        "tests/cdp.mjs",
+        "tests/check_repository.py",
+        "tests/check_site.py",
+        "tests/clean_render.py",
+        "tests/inline-code.mjs",
+        "tests/instances.mjs",
+        "tests/make_fixtures.py",
+        "tests/run-browser.sh",
+        "tests/sandbox.mjs",
+        "tests/test_licensing.py",
+        "tests/test_tooling.py",
+        "tooling/LICENSE",
+        "tooling/browser_client.mjs",
+        "tooling/browser_course.py",
+        "tooling/install_quarto.py",
+        "tooling/legal_distribution.py",
+        "tooling/platform_validate.py",
+        "tooling/post_render.py",
+        "tooling/render_clean.py",
+        "tooling/safe_paths.py",
+        "tooling/sync_course.py",
+        "unidades/fundamentos.qmd",
+        "workflows/LICENSE",
+        "workflows/action-pins.json",
+        "workflows/deploy.yml",
+        "workflows/validate.yml",
+        ".github/workflows/validate.yml"
+      ],
+      "license": "MIT",
+      "copyright": "2026 ngulloa"
+    },
+    {
+      "paths": [
+        "tooling/platform_validate.py",
+        "tooling/render_clean.py",
+        "tooling/post_render.py",
+        "tooling/install_quarto.py",
+        "tooling/sync_course.py",
+        "tooling/browser_course.py",
+        "tooling/safe_paths.py",
+        "tooling/legal_distribution.py",
+        "tooling/licensing.py",
+        "tooling/create_course.py",
+        "tooling/requirements-licensing.txt",
+        "tests/test_licensing_automation.py",
+        "docs/AUTOMATIZACION-LICENCIAS.md",
+        "tooling/plan_licensing_update.py"
+      ],
+      "license": "MIT",
+      "copyright": "2026 ngulloa"
+    },
+    {
+      "paths": [
+        "_extensions/ustudyopen-design/_extension.yml",
+        "_extensions/ustudyopen-design/PROVENANCE.md",
+        "_extensions/ustudyopen-design/LICENSING.md",
+        "_extensions/ustudyopen-design/THIRD-PARTY-NOTICES.md",
+        "_extensions/ustudyopen-design/brand/_brand-dark.yml",
+        "_extensions/ustudyopen-design/brand/_brand.yml",
+        "_extensions/ustudyopen-design/scss/uso.scss",
+        "_extensions/ustudyopen-design/scss/_base.scss",
+        "_extensions/ustudyopen-design/scss/_layout.scss",
+        "_extensions/ustudyopen-design/scss/_components.scss",
+        "_extensions/ustudyopen-design/scss/_callouts.scss",
+        "_extensions/ustudyopen-design/scss/_academic.scss",
+        "_extensions/ustudyopen-design/assets/after-body.html",
+        "_extensions/ustudyopen-design/assets/favicon.svg",
+        "_extensions/ustudyopen-design/filters/status.lua",
+        "_extensions/ustudyopen-design/REUSE.toml"
+      ],
+      "license": "MIT",
+      "copyright": "2026 ngulloa"
+    }
+  ],
+  "third_party": [],
+  "legacy_review": {
+    "LICENSE": {
+      "reason": "Existing source; see approved LICENSING.md and prior inventory. REUSE metadata pending, no new license inferred.",
+      "sha256": "86abf44f49e09c597fac4a1509d372d9796107e034567e61eba94af2116c18df"
+    }
+  },
+  "import_paths": [
+    "assets/vendor/**",
+    "vendor/**",
+    "third_party/**"
+  ],
+  "is_template": false
+}

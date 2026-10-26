@@ -1,0 +1,60 @@
+---
+title: Matemática para comprender el mundo
+description: "Un espacio para explorar ideas, conectar conceptos y aprender a tu ritmo."
+toc: false
+---
+
+::: {.uso-hero}
+::: {.uso-eyebrow}
+Curso de muestra · UStudyOpen Design v0.2
+:::
+
+Del lenguaje de las funciones a la interpretación de modelos: construye una base sólida a través de explicaciones, ejemplos y pequeñas exploraciones.
+
+<ul class="uso-meta" aria-label="Información del curso">
+<li>Nivel universitario inicial</li>
+<li>3 unidades de referencia</li>
+<li>Material abierto</li>
+</ul>
+
+::: {.uso-actions}
+[Comenzar la primera unidad](unidades/fundamentos.qmd){.uso-button}
+[Explorar componentes](componentes.qmd){.uso-button .uso-button--secondary}
+:::
+:::
+
+## Un recorrido, paso a paso
+
+La galería utiliza contenido breve creado para evaluar la presentación. Las unidades futuras muestran estados visuales; todavía no contienen material académico.
+
+<ol class="uso-topic-list">
+<li><span class="uso-topic-number" aria-hidden="true">01</span><div>
+<h3><a href="unidades/fundamentos.qmd">Funciones y modelos</a></h3>
+<p>Relaciones entre variables, representaciones y una primera interpretación de la pendiente.</p>
+<span class="uso-status uso-status--lista"><span aria-hidden="true">✓</span> Lista</span>
+</div></li>
+<li><span class="uso-topic-number" aria-hidden="true">02</span><div>
+<h3>Límites y continuidad</h3>
+<p>Una vista previa del siguiente tramo del curso.</p>
+<span class="uso-status uso-status--en-desarrollo"><span aria-hidden="true">◐</span> En desarrollo</span>
+</div></li>
+<li><span class="uso-topic-number" aria-hidden="true">03</span><div>
+<h3>Cambio y aproximación</h3>
+<p>Ideas para conectar la matemática con preguntas del mundo real.</p>
+<span class="uso-status uso-status--proximamente"><span aria-hidden="true">○</span> Próximamente</span>
+</div></li>
+</ol>
+
+## Aprender con propósito
+
+Lee una explicación, revisa un ejemplo y contrasta tu intuición. Las fórmulas, el código y las visualizaciones comparten una misma jerarquía para que puedas concentrarte en el contenido.
+
+::: {.uso-summary}
+### En esta galería
+
+- **Lectura académica:** navegación por unidades y tabla de contenidos.
+- **Componentes reutilizables:** definiciones, ejercicios, tablas y resúmenes.
+- **Exploración:** controles y un gráfico que conserva su estado al cambiar de tema.
+
+[Visitar el laboratorio visual](laboratorio.qmd) o [consultar la guía del sistema](sistema.qmd).
+:::
