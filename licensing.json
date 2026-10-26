@@ -57,7 +57,8 @@
         "workflows/LICENSE",
         "workflows/action-pins.json",
         "workflows/deploy.yml",
-        "workflows/validate.yml"
+        "workflows/validate.yml",
+        ".github/workflows/validate.yml"
       ],
       "license": "MIT",
       "copyright": "2026 ngulloa"
